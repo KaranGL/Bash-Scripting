@@ -1,0 +1,89 @@
+#!/bin/bash
+
+#Karan Sharma | This script calculates either the addition or subtraction of two integers.
+
+function add () {
+	clear
+	sleep 2
+	((calc = $1 + $2))
+	echo $1 + $2 = $calc
+}
+
+function sub () {
+	clear
+	sleep 2
+	((calc = $1 - $2))
+	echo $1 - $2 = $calc
+}
+
+function Menu1 () {
+	clear
+	sleep 2
+	echo "MENU 1"
+	echo "C) Calculation"
+	echo "X) Exit"
+}	
+
+function Menu2 () {
+	clear
+	sleep 2
+	echo "MENU 2"
+	echo "Please enter a number:"
+}
+
+function Menu3 () {
+	clear
+	sleep 2
+	echo "MENU 3"
+	echo "Please enter an operator (+/-):"
+}
+
+if [ $# -eq 3]
+then
+	if [ "$2" = "+" ]
+	then
+		add $1 $3
+	elif [ "$2" = "-" ]	
+	then
+		sub $1 $3
+	fi
+else 
+	while true
+	do
+		Menu1
+		read M1
+	
+		if [ "$M1" = "C" ] || [ "$M1" = "c" ]
+		then
+			Menu2
+			read M2
+			if [ "$M2" -eq "$M2" ]
+			then
+				Menu3
+				read M3
+				
+				if [ "$M3" = "+" ] || [ "$M3" = "-" ]
+				then
+					Menu2
+					read M4
+					
+					if [ "$M4" -eq "$M4" ]
+					then
+						if [ "$M3" = "+" ]
+						then
+							add $M2 $M4
+						elif [ "$M3" = "-" ]
+						then
+							sub $M2 $M4
+						fi
+						sleep 3
+					fi
+				fi
+			fi
+
+		else
+			sleep 2
+			exit 0
+		fi
+	done
+fi

@@ -1,0 +1,63 @@
+#!/bin/bash
+#Karan Sharma | This script creates a menu with 7 different options with which you can create a user, delete a user
+#change supplementary group for a user account, change the initial group for the user, change default login shell for
+#the user, change the account expiration date of a user account and exit from the script.
+
+stop=N
+while [ $stop != "Q" ] || [ $stop != "q" ]
+do
+	clear
+	echo "A) Create a user account "
+	echo "B) Delete a user account "
+	echo "C) Change supplementary group for a user account"
+	echo "D) Change Initial group for a user account"
+	echo "E) Change default login shell for a user account"
+	echo "F) Change account expiration date for a user account"
+	echo "Q) Quit"
+	echo ""
+	read -p "Your choice: " stop
+	echo ""
+	echo "You entered $stop."
+
+if [ $stop = "A" ] || [ $stop = "a" ]
+then
+	read -p "Enter the username: " username
+	read -p "Enter the user's home directory: " hdirectory
+	read -p "Enter the default login shell: " defshell
+	useradd -d "$hdirectory" -s "$defshell" "$username"
+elif [ $stop = "B" ] || [ $stop = "b" ]
+then
+	read -p "Enter the username: " username
+	userdel -r "$username"
+elif [ $stop = "C" ] || [ $stop = "c" ]
+then
+	read -p "Enter the username: " username
+	read -p "Enter the name of the supplementary group: " supgroup
+	usermod -G "$supgroup" "$username"
+elif [ $stop = "D" ] || [ $stop = "d" ]
+then
+	read -p "Enter the username: " username
+	read -p "Enter the initial group name: " initgroup
+	read -p "Enter the new initial group name: " initgroup
+	usermod -g "$initgroup" "$username"
+elif [ $stop = "E" ] || [ $stop = "e" ]
+then
+	read -p "Enter the username: " username
+	read -p "Enter the login shell: " defshell
+	read -p "Enter the new login shell: " newdefshell
+	usermod -s "$newdefshell" "$username"
+elif [ $stop = "F" ] || [ $stop = "f" ]
+then
+	read -p "Enter the username" username
+	read -p "Enter the expiration date: " expdate
+	read -p "Enter the new expiraiton date: " newexpdate
+	usermod -e "$newexpdate" "$username"
+elif [ $stop = "Q" ] || [ $stop = "q" ]
+then
+	sleep 3
+	break
+else
+	echo "WRONG INPUT!!! PLEASE PROVIDE CORRECT INPUT!!!"
+fi
+sleep 3
+done
