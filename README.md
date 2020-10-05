@@ -1,4 +1,4 @@
-# Bash-Scripting
+# Bash-Scripting (School assignments | Individual work)
 
 * Bash_Scripting_Add-or-sub-two-integers -> This script calculates either the addition or subtraction of two integers, as per user's choice.
 
